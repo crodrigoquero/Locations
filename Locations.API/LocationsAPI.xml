@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Locations.API</name>
+    </assembly>
+    <members>
+        <member name="M:Locations.API.Controllers.NationalParkController.GetNationalParks">
+            <summary>
+            Get a list with all the locations
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Locations.API.Controllers.NationalParkController.GetNationalPark(System.Int32)">
+            <summary>
+            Get individual National Park
+            </summary>
+            <param name="nationalParkId">The id of the location</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
