@@ -166,7 +166,7 @@ namespace Locations.API.Repository
 
             List<User> usersList = new List<User>();
             int numberOfIndividualsFormAPI;
-
+              
             try
             {
                 var stringTask = client.GetStringAsync("https://bpdts-test-app.herokuapp.com/users");
@@ -180,7 +180,7 @@ namespace Locations.API.Repository
                 {
                        
                     var user = new User();
-
+                     
                     user.Id = x[index].id;
                     user.first_name = x[index].first_name;
                     user.last_name = x[index].last_name;
