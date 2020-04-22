@@ -178,7 +178,7 @@ namespace Locations.API.Repository
 
                 for (int index = 0; index <= numberOfIndividualsFormAPI - 1; index++)
                 {
-
+                       
                     var user = new User();
 
                     user.Id = x[index].id;
