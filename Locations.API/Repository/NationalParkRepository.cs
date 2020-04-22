@@ -18,38 +18,38 @@ namespace Locations.API.Repository
         }
 
 
-        public bool CreateNationalPark(NationalPark nationalPark)
+        public bool CreateNationalPark(Location nationalPark)
         {
-            _db.NationalParks.Add(nationalPark);
+            _db.Locations.Add(nationalPark);
             return Save();
         }
 
-        public bool DeleteNationalPark(NationalPark nationalPark)
+        public bool DeleteNationalPark(Location nationalPark)
         {
-            _db.NationalParks.Remove(nationalPark);
+            _db.Locations.Remove(nationalPark);
             return Save();
         }
 
-        public NationalPark GetNationalPark(int nationalParkId)
+        public Location GetNationalPark(int nationalParkId)
         {
-            return _db.NationalParks.FirstOrDefault(a => a.Id == nationalParkId);
+            return _db.Locations.FirstOrDefault(a => a.Id == nationalParkId);
 
         }
 
-        public ICollection<NationalPark> GetNationalParks()
+        public ICollection<Location> GetNationalParks()
         {
-            return _db.NationalParks.OrderBy(a => a.Name).ToList();
+            return _db.Locations.OrderBy(a => a.Name).ToList();
         }
 
         public bool NationalParkExist(string name)
         {
-            bool value = _db.NationalParks.Any(a => a.Name.ToLower().Trim() == name.ToLower().Trim());
+            bool value = _db.Locations.Any(a => a.Name.ToLower().Trim() == name.ToLower().Trim());
             return value;
         }
 
         public bool NationalParkExist(int id)
         {
-            return _db.NationalParks.Any(a => a.Id == id);
+            return _db.Locations.Any(a => a.Id == id);
         }
 
         public bool Save()
@@ -57,9 +57,9 @@ namespace Locations.API.Repository
             return _db.SaveChanges() >= 0 ? true : false;
         }
 
-        public bool UpdateNationalPark(NationalPark nationalPark)
+        public bool UpdateNationalPark(Location nationalPark)
         {
-            _db.NationalParks.Update(nationalPark);
+            _db.Locations.Update(nationalPark);
             return Save();
         }
     }

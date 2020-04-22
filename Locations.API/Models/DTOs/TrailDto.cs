@@ -21,7 +21,7 @@ namespace Locations.API.Models.DTOs
         [Required]
         public int NationalParkId { get; set; }
 
-        public NationalParkDto NationalPark { get; set; }
+        public LocationDto NationalPark { get; set; }
 
     }
 }

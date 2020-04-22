@@ -12,17 +12,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace Locations.API.Controllers
 {
     //[Route("api/[controller]")]
-    [Route("api/v{version:apiVersion}/nationalparks")]
+    [Route("api/v{version:apiVersion}/locations")]
     [ApiVersion("2.0")]
     [ApiController]
     //[ApiExplorerSettings(GroupName = "LocationsOpenAPISpecNP")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class NationalParkV2Controller : ControllerBase
+    public class LocationV2Controller : ControllerBase
     {
         private readonly INationalParkRepository _npRepo;
         private readonly IMapper _mapper;
 
-        public NationalParkV2Controller(INationalParkRepository npRepo, IMapper mapper)
+        public LocationV2Controller(INationalParkRepository npRepo, IMapper mapper)
         {
             _npRepo = npRepo;
             _mapper = mapper;
@@ -33,8 +33,8 @@ namespace Locations.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(List<NationalParkDto>))]
-        public IActionResult GetNationalParks()
+        [ProducesResponseType(200, Type = typeof(List<LocationDto>))]
+        public IActionResult GetLocations()
         {
             var obj = _npRepo.GetNationalParks().FirstOrDefault();
 

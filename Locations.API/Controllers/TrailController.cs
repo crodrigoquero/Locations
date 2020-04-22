@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using AutoMapper;
 using Locations.API.Models;
@@ -19,11 +21,13 @@ namespace Locations.API.Controllers
     public class TrailController : ControllerBase
     {
         private readonly ITrailRepository _npRepo;
+        private readonly IUserRepository _userRepo;
         private readonly IMapper _mapper;
 
-        public TrailController(ITrailRepository trailRepo, IMapper mapper)
+        public TrailController(ITrailRepository trailRepo, IUserRepository userRepo, IMapper mapper)
         {
             _npRepo = trailRepo;
+            _userRepo = userRepo;
             _mapper = mapper;
         }
 
@@ -32,8 +36,8 @@ namespace Locations.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(List<NationalParkDto>))]
-        public IActionResult GetNationalParks()
+        [ProducesResponseType(200, Type = typeof(List<LocationDto>))]
+        public IActionResult GetTrails()
         {
             var objList = _npRepo.GetTrails();
 
@@ -47,6 +51,8 @@ namespace Locations.API.Controllers
             return Ok(objDto);
 
         }
+
+       
 
         /// <summary>
         /// Get individual Trail
@@ -74,7 +80,7 @@ namespace Locations.API.Controllers
         /// <summary>
         /// Get trails of a National Park
         /// </summary>
-        /// <param name="nationalParkId">The id of the national park</param>
+        /// <param name="nationalParkId">The id of the location</param>
         /// <returns></returns>
         [HttpGet("[action]/{nationalParkId:int}", Name = "GetTrailsInNationalPark")]
         [ProducesResponseType(200, Type = typeof(TrailDto))]
@@ -107,7 +113,7 @@ namespace Locations.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreateTrail([FromBody] TrailCreateDto trailDto)
+        public IActionResult CreateTrail([FromBody] LocationCreateDto trailDto)
         {
             if(trailDto == null)
             {
@@ -124,7 +130,7 @@ namespace Locations.API.Controllers
 
             if (!_npRepo.CreateTrail(trailObj)){
 
-                ModelState.AddModelError("", $"Something went wrong when saving the the record {trailObj.Name}");
+                ModelState.AddModelError("", $"Something went wrong when saving the record {trailObj.Name}");
                 return StatusCode(500, ModelState);
             }
 
@@ -147,7 +153,7 @@ namespace Locations.API.Controllers
 
             if (!_npRepo.UpdateTrail(trailObj))
             {
-                ModelState.AddModelError("", $"Something went wrong when updating the the record {trailObj.Name}");
+                ModelState.AddModelError("", $"Deletion error on record {trailObj.Name}");
                 return StatusCode(500, ModelState);
             }
 
@@ -173,7 +179,7 @@ namespace Locations.API.Controllers
             if (!_npRepo.DeleteTrail(trailObj))
             {
 
-                ModelState.AddModelError("", $"Something went wrong when deleting the the record {trailObj.Name}");
+                ModelState.AddModelError("", $"Something went wrong when deleting the record {trailObj.Name}");
                 return StatusCode(500, ModelState);
             }
 

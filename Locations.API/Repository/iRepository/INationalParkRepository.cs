@@ -8,13 +8,13 @@ namespace Locations.API.Repository.iRepository
 {
     public interface INationalParkRepository
     {
-        ICollection<NationalPark> GetNationalParks();
-        NationalPark GetNationalPark(int nationalParkId);
+        ICollection<Location> GetNationalParks();
+        Location GetNationalPark(int nationalParkId);
         bool NationalParkExist(string name);
         bool NationalParkExist(int id);
-        bool CreateNationalPark(NationalPark nationalPark);
-        bool UpdateNationalPark(NationalPark nationalPark);
-        bool DeleteNationalPark(NationalPark nationalPark);
+        bool CreateNationalPark(Location nationalPark);
+        bool UpdateNationalPark(Location nationalPark);
+        bool DeleteNationalPark(Location nationalPark);
 
         bool Save();
     }

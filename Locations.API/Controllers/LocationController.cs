@@ -11,17 +11,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Locations.API.Controllers
 {
-    [Route("api/v{version:apiVersion}/nationalparks")]
+    [Route("api/v{version:apiVersion}/locations")]
     //[Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(GroupName = "LocationsOpenAPISpecNP")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class NationalParkController : ControllerBase
+    public class LocationController : ControllerBase
     {
         private readonly INationalParkRepository _npRepo;
         private readonly IMapper _mapper;
 
-        public NationalParkController(INationalParkRepository npRepo, IMapper mapper)
+        public LocationController(INationalParkRepository npRepo, IMapper mapper)
         {
             _npRepo = npRepo;
             _mapper = mapper;
@@ -32,16 +32,16 @@ namespace Locations.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(List<NationalParkDto>))]
-        public IActionResult GetNationalParks()
+        [ProducesResponseType(200, Type = typeof(List<LocationDto>))]
+        public IActionResult GetLocations()
         {
             var objList = _npRepo.GetNationalParks();
 
-            var objDto = new List<NationalParkDto>();
+            var objDto = new List<LocationDto>();
 
             foreach (var obj in objList)
             {
-                objDto.Add(_mapper.Map<NationalParkDto>(obj));
+                objDto.Add(_mapper.Map<LocationDto>(obj));
             }
 
             return Ok(objDto);
@@ -49,35 +49,35 @@ namespace Locations.API.Controllers
         }
 
         /// <summary>
-        /// Get individual National Park
+        /// Get individual location 
         /// </summary>
-        /// <param name="nationalParkId">The id of the location</param>
+        /// <param name="locationId">The id of the location</param>
         /// <returns></returns>
-        [HttpGet("{nationalParkId:int}", Name = "GetNationalPark")]
-        [ProducesResponseType(200, Type = typeof(NationalParkDto))]
+        [HttpGet("{locationId:int}", Name = "GetLocation")]
+        [ProducesResponseType(200, Type = typeof(LocationDto))]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
-        public IActionResult GetNationalPark(int nationalParkId)
+        public IActionResult GetLocation(int locationId)
         {
-            var obj = _npRepo.GetNationalPark(nationalParkId);
+            var obj = _npRepo.GetNationalPark(locationId);
 
             if(obj == null)
             {
                 return NotFound();
             }
 
-            var objDto = _mapper.Map<NationalParkDto>(obj);
+            var objDto = _mapper.Map<LocationDto>(obj);
 
             return Ok(objDto);
         }
 
 
         [HttpPost]
-        [ProducesResponseType(201, Type = typeof(NationalParkDto))]
+        [ProducesResponseType(201, Type = typeof(LocationDto))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreateNationalPark([FromBody] NationalParkDto nationalParkDto)
+        public IActionResult CreateNationalPark([FromBody] LocationDto nationalParkDto)
         {
             if(nationalParkDto == null)
             {
@@ -86,11 +86,11 @@ namespace Locations.API.Controllers
 
             if (_npRepo.NationalParkExist(nationalParkDto.Name))
             {
-                ModelState.AddModelError("", "National Park already exist");
+                ModelState.AddModelError("", "Location already exist");
                 return StatusCode(404, ModelState);
             }
 
-            var nationalParkObj = _mapper.Map<NationalPark>(nationalParkDto);
+            var nationalParkObj = _mapper.Map<Location>(nationalParkDto);
 
             if (!_npRepo.CreateNationalPark(nationalParkObj)){
 
@@ -98,22 +98,22 @@ namespace Locations.API.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtRoute("GetNationalPark", new {nationalParkId = nationalParkObj.Id}, nationalParkObj);
+            return CreatedAtRoute("GetLocations", new {nationalParkId = nationalParkObj.Id}, nationalParkObj);
         }
 
 
-        [HttpPatch("{nationalParkId:int}", Name = "UpdateNationalPark")]
+        [HttpPatch("{locationId:int}", Name = "UpdateLocation")]
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdateNationalPark(int nationalParkId, [FromBody] NationalParkDto nationalParkDto)
+        public IActionResult UpdateLocation(int locationId, [FromBody] LocationDto nationalParkDto)
         {
-            if (nationalParkDto == null || nationalParkId!=nationalParkDto.Id)
+            if (nationalParkDto == null || locationId != nationalParkDto.Id)
             {
                 return BadRequest(ModelState);
             }
 
-            var nationalParkObj = _mapper.Map<NationalPark>(nationalParkDto);
+            var nationalParkObj = _mapper.Map<Location>(nationalParkDto);
 
             if (!_npRepo.UpdateNationalPark(nationalParkObj))
             {
@@ -125,20 +125,20 @@ namespace Locations.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{nationalParkId:int}", Name = "DeleteNationalPark")]
+        [HttpDelete("{locationId:int}", Name = "DeleteLocation")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeleteNatioalPark(int nationalParkId)
+        public IActionResult DeleteLocation(int locationId)
         {
 
-            if (!_npRepo.NationalParkExist(nationalParkId))
+            if (!_npRepo.NationalParkExist(locationId))
             {
                 return NotFound();
             }
 
-            var nationalParkObj = _npRepo.GetNationalPark(nationalParkId);
+            var nationalParkObj = _npRepo.GetNationalPark(locationId);
 
             if (!_npRepo.DeleteNationalPark(nationalParkObj))
             {

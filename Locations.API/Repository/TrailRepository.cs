@@ -33,13 +33,13 @@ namespace Locations.API.Repository
 
         public Trail GetTrail(int trailId)
         {
-            return _db.Trails.Include(c => c.NationalPark).FirstOrDefault(a => a.Id == trailId);
+            return _db.Trails.Include(c => c.Location).FirstOrDefault(a => a.Id == trailId);
 
         }
 
         public ICollection<Trail> GetTrails()
         {
-            return _db.Trails.Include(c => c.NationalPark).OrderBy(a => a.Name).ToList();
+            return _db.Trails.Include(c => c.Location).OrderBy(a => a.Name).ToList();
         }
 
         public bool TrailExist(string name)
@@ -66,7 +66,7 @@ namespace Locations.API.Repository
 
         public ICollection<Trail> GetTrailsInNationalPark(int npId)
         {
-            return _db.Trails.Include(c => c.NationalPark).Where(c => c.NationalParkId == npId).ToList();
+            return _db.Trails.Include(c => c.Location).Where(c => c.LocationId == npId).ToList();
         }
     }
 }

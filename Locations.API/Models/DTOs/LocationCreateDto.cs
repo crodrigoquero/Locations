@@ -7,7 +7,7 @@ using static Locations.API.Models.Trail;
 
 namespace Locations.API.Models.DTOs
 {
-    public class TrailCreateDto
+    public class LocationCreateDto
     {
         //public int Id { get; set; }
         [Required]

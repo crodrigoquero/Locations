@@ -24,10 +24,10 @@ namespace Locations.API.Models
         public DificultyType Difficulty { get; set; }
 
         [Required]
-        public int NationalParkId { get; set; }
+        public int LocationId { get; set; }
 
-        [ForeignKey("NationalParkId")]
-        public NationalPark NationalPark { get; set; }
+        [ForeignKey("LocationId")]
+        public Location Location { get; set; }
 
         public DateTime DateCreated { get; set; }
 

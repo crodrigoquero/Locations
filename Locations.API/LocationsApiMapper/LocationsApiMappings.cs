@@ -12,10 +12,14 @@ namespace Locations.API.LocationsApiMapper
     {
         public LocationsApiMappings()
         {
-            CreateMap<NationalPark, NationalParkDto>().ReverseMap();
+            CreateMap<Location, LocationDto>().ReverseMap();
+
             CreateMap<Trail, TrailDto>().ReverseMap();
-            CreateMap<Trail, TrailCreateDto>().ReverseMap();
+            CreateMap<Trail, LocationCreateDto>().ReverseMap();
             CreateMap<Trail, TrailUpdateDto>().ReverseMap();
+
+            CreateMap<User, UserDto>().ReverseMap();
+
         }    
     }
 }

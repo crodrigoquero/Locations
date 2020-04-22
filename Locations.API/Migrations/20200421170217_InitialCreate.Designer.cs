@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Locations.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200318165617_addTrailsToDb")]
-    partial class addTrailsToDb
+    [Migration("20200421170217_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace Locations.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Locations.API.Models.NationalPark", b =>
+            modelBuilder.Entity("Locations.API.Models.Location", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,6 +35,9 @@ namespace Locations.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<DateTime>("Stablished")
                         .HasColumnType("datetime2");
 
@@ -42,9 +45,15 @@ namespace Locations.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("longitude")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
-                    b.ToTable("NationalParks");
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("Locations.API.Models.Trail", b =>
@@ -64,25 +73,79 @@ namespace Locations.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Elevation")
+                        .HasColumnType("float");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NationalParkId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("NationalParkId");
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Trails");
                 });
 
+            modelBuilder.Entity("Locations.API.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Area")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("DistanceFromLondon")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("city")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("first_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ip_address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("last_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("longitude")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("Locations.API.Models.Trail", b =>
                 {
-                    b.HasOne("Locations.API.Models.NationalPark", "NationalPark")
+                    b.HasOne("Locations.API.Models.Location", "Location")
                         .WithMany()
-                        .HasForeignKey("NationalParkId")
+                        .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

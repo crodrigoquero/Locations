@@ -76,7 +76,7 @@ namespace Locations.Web.Controllers
             }
             else
             {
-                IEnumerable<NationalPark> npList = await _npRepo.GetAllAsync(SD.NationalParkAPIPath, HttpContext.Session.GetString("JWToken"));
+                IEnumerable<NationalPark> npList = await _npRepo.GetAllAsync(SD.NationalParkAPIPath);
 
                 TrailsVM objVM = new TrailsVM()
                 {

@@ -4,26 +4,26 @@
         <name>Locations.API</name>
     </assembly>
     <members>
-        <member name="M:Locations.API.Controllers.NationalParkController.GetNationalParks">
+        <member name="M:Locations.API.Controllers.LocationController.GetLocations">
             <summary>
             Get a list with all the locations
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Locations.API.Controllers.NationalParkController.GetNationalPark(System.Int32)">
+        <member name="M:Locations.API.Controllers.LocationController.GetLocation(System.Int32)">
             <summary>
-            Get individual National Park
+            Get individual location 
             </summary>
-            <param name="nationalParkId">The id of the location</param>
+            <param name="locationId">The id of the location</param>
             <returns></returns>
         </member>
-        <member name="M:Locations.API.Controllers.NationalParkV2Controller.GetNationalParks">
+        <member name="M:Locations.API.Controllers.LocationV2Controller.GetLocations">
             <summary>
             Get a list with all the locations
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Locations.API.Controllers.TrailController.GetNationalParks">
+        <member name="M:Locations.API.Controllers.TrailController.GetTrails">
             <summary>
             Get a list with all the trails
             </summary>
@@ -40,7 +40,25 @@
             <summary>
             Get trails of a National Park
             </summary>
-            <param name="nationalParkId">The id of the national park</param>
+            <param name="nationalParkId">The id of the location</param>
+            <returns></returns>
+        </member>
+        <member name="M:Locations.API.Controllers.UserController.GetUserFromApi(System.Int32)">
+            <summary>
+            Access GOVERMENT (HMRC) api
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Locations.API.Controllers.UserController.GetUsersFromApi">
+            <summary>
+            Access GOVERMENT (HMRC) api
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Locations.API.Controllers.UserController.GetLondonUsersFromApi">
+            <summary>
+            Access GOVERMENT (HMRC) api
+            </summary>
             <returns></returns>
         </member>
     </members>
