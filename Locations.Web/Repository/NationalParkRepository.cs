@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Locations.Web.Repository
 {
-    public class NationalParkRepository : Repository<NationalPark>, INationalParkRepository
+    public class NationalParkRepository : Repository<Location>, INationalParkRepository
     {
         private readonly IHttpClientFactory _clientFactory;
 

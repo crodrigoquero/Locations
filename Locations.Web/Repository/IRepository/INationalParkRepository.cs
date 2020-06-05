@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Locations.Web.Repository.IRepository
 {
-    public interface INationalParkRepository : IRepository<NationalPark>
+    public interface INationalParkRepository : IRepository<Location>
     {
 
     }

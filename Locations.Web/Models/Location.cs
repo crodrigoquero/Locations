@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Locations.Web.Models
 {
-    public class NationalPark
+    public class Location
     {
         public int Id { get; set; }
 

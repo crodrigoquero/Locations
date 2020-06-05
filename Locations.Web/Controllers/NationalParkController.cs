@@ -19,12 +19,12 @@ namespace Locations.Web.Controllers
         }
         public IActionResult Index()
         {
-            return View(new NationalPark() { });
+            return View(new Location() { });
         }
 
         public async Task<IActionResult> Upsert(int? id)
         {
-            NationalPark obj = new NationalPark();
+            Location obj = new Location();
 
             if(id == null)
             {
@@ -45,7 +45,7 @@ namespace Locations.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Upsert(NationalPark obj)
+        public async Task<IActionResult> Upsert(Location obj)
         {
             if (ModelState.IsValid)
             {

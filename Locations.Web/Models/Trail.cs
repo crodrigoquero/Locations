@@ -25,6 +25,6 @@ namespace Locations.Web.Models
         [Required]
         public int NationalParkId { get; set; }
 
-        public NationalPark NationalPark { get; set; }
+        public Location NationalPark { get; set; }
     }
 }

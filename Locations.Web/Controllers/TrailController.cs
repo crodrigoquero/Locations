@@ -28,7 +28,7 @@ namespace Locations.Web.Controllers
         public async Task<IActionResult> Upsert(int? id)
         {
 
-            IEnumerable<NationalPark> npList = await _npRepo.GetAllAsync(SD.NationalParkAPIPath);
+            IEnumerable<Location> npList = await _npRepo.GetAllAsync(SD.NationalParkAPIPath);
             TrailsVM objVM = new TrailsVM()
             {
                 NationalParkList = npList.Select(i => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
@@ -76,7 +76,7 @@ namespace Locations.Web.Controllers
             }
             else
             {
-                IEnumerable<NationalPark> npList = await _npRepo.GetAllAsync(SD.NationalParkAPIPath);
+                IEnumerable<Location> npList = await _npRepo.GetAllAsync(SD.NationalParkAPIPath);
 
                 TrailsVM objVM = new TrailsVM()
                 {
